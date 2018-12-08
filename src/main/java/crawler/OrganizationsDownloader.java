@@ -1,6 +1,7 @@
 package crawler;
 
 import downloader.CachingDownloader;
+import downloader.Result;
 import downloader.URLUtils;
 
 import java.io.BufferedReader;
@@ -11,9 +12,10 @@ import java.net.MalformedURLException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Calendar;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class BookDownloader {
+public class OrganizationsDownloader {
 
     private static FileVisitor<Path> directoryCleaner = new SimpleFileVisitor<Path>() {
         @Override
@@ -29,34 +31,17 @@ public class BookDownloader {
         }
     };
 
-    private final static String MAIN_PAGE_URL = "https://www.rusprofile.ru/codes/51021";
-    private final static String BOOK_URL = "https://e.lanbook.com/book/";
+    private final static Pattern CATEGORY_URL_TEMPLATE =
+            Pattern.compile("^https://www.rusprofile.ru/codes/\\d+/moskva(.*)?");
+    private final static String COMPANY_URL = "https://www.rusprofile.ru/id/";
     private final static String BIBL_RECORD_BEGIN = "<div id=\"bibliographic_record\">";
     private final static String BIBL_RECORD_END = "</div>";
     private final static byte OK_MARKER = '+';
-    private final static int CODES[] = {917, 918, 1537};
-    private static final String HEADER_TEMPLATE = "https://e.lanbook.com/books/%d";
-    private static final String PAGE_TEMPLATE = "https://e.lanbook.com/books/%d?page=";
-    private static final String ERROR_MSG = "running:\n" +
-            "BookDownloader --all <folder for storing downloaded files> <file for storing result>\n" +
-            "BookDownloader --download <folder for storing downloaded files>\n" +
-            "BookDownloader --parse <folder for storing downloaded files> <file for storing result>\n" +
-            "BookDownloader --clean <path for storing downloaded files>";
 
     private static int MAX_YEAR = Calendar.getInstance().get(Calendar.YEAR);
     private static int MIN_YEAR = MAX_YEAR - 4;
 
-    private static boolean containsCode(String url) {
-        for (int code : CODES) {
-            if (url.equals(String.format(HEADER_TEMPLATE, code)) ||
-                    url.startsWith(String.format(PAGE_TEMPLATE, code))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static void download(Path dirForDownloadedFiles) {
+    private static void download(Path dirForDownloadedFiles, String code) {
         try {
             Files.createDirectories(dirForDownloadedFiles);
         } catch (IOException e) {
@@ -64,10 +49,11 @@ public class BookDownloader {
             return;
         }
         String host;
+        String mainPage = "https://www.rusprofile.ru/codes/" + code + "0000/moskva";
         try {
-            host = URLUtils.getHost("https://www.rusprofile.ru/codes/52011");
+            host = URLUtils.getHost(mainPage);
         } catch (MalformedURLException e) {
-            System.err.println("Cannot get host of e.lanbook.com " + e.getMessage());
+            System.err.println("Cannot get host of " + mainPage + " " + e.getMessage());
             return;
         }
 
@@ -82,14 +68,13 @@ public class BookDownloader {
                             } catch (MalformedURLException e) {
                                 return false;
                             }
-                            return url.equals(MAIN_PAGE_URL) ||
-                                    url.contains(BOOK_URL) ||
-                                    containsCode(url);
+                            return CATEGORY_URL_TEMPLATE.matcher(url).matches() ||
+                                    url.startsWith(COMPANY_URL);
 
                         }
                 )
         ) {
-            crawler.download(MAIN_PAGE_URL, Integer.MAX_VALUE);
+            Result result = crawler.download(mainPage, Integer.MAX_VALUE);
         } catch (IOException e) {
             System.err.println("Error downloading " + e.getMessage());
         }
@@ -160,47 +145,18 @@ public class BookDownloader {
 
     public static void main(String[] args) {
 
-        if (args == null || args.length < 1 || args.length > 3 || args[0] == null) {
-            System.out.println(ERROR_MSG);
-            return;
-        }
-
-        if (args[0].equals("--all")) {
-            if (args.length != 3 || args[1] == null || args[2] == null) {
-                System.out.println(ERROR_MSG);
-                return;
-            }
-            Path dirForDownloadedFiles = Paths.get(args[1]);
-            Path pathToRes = Paths.get(args[2]);
-            download(dirForDownloadedFiles);
-            parse(dirForDownloadedFiles, pathToRes);
-            return;
-        }
-
         if (args[0].equals("--download")) {
-            if (args.length != 2 || args[1] == null) {
-                System.out.println(ERROR_MSG);
-                return;
-            }
             Path dirForDownloadedFiles = Paths.get(args[1]);
-            download(dirForDownloadedFiles);
-            return;
-        }
-
-        if (args[0].equals("--parse")) {
-            if (args.length != 3 || args[1] == null || args[2] == null) {
-                System.out.println(ERROR_MSG);
-                return;
+            for (int i = 1; i <= 9; i++) {
+                String catName = "" + i;
+                Path forDownload = dirForDownloadedFiles.resolve(catName);
+                download(forDownload, catName);
             }
-            Path dirForDownloadedFiles = Paths.get(args[1]);
-            Path pathToRes = Paths.get(args[2]);
-            parse(dirForDownloadedFiles, pathToRes);
             return;
         }
 
         if (args[0].equals("--clean")) {
             if (args.length != 2 || args[1] == null) {
-                System.out.println(ERROR_MSG);
                 return;
             }
 
@@ -212,10 +168,7 @@ public class BookDownloader {
             } catch (IOException e) {
                 System.err.println("Error while cleaning directory " + e.getMessage());
             }
-            return;
         }
-
-        System.out.println(ERROR_MSG);
     }
 }
 

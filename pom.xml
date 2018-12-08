@@ -28,6 +28,14 @@
             <scope>system</scope>
             <systemPath>${basedir}/lib/jsoup-1.8.1.jar</systemPath>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.5</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/gson-2.8.5.jar</systemPath>
+        </dependency>
     </dependencies>
 
 

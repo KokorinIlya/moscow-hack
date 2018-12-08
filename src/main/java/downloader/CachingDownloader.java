@@ -48,7 +48,7 @@ public class CachingDownloader implements Downloader {
         final URI uri = URLUtils.getURI(url);
         final Path file = directory.resolve(URLEncoder.encode(uri.toString(), "UTF-8"));
         if (Files.notExists(file)) {
-            //System.out.println("Downloading " + url);
+            System.out.println("Downloading " + url);
             try {
                 try (final InputStream is = uri.toURL().openStream()) {
                     Files.copy(new SequenceInputStream(new ByteArrayInputStream(OK_MARKER), is), file);
@@ -59,12 +59,13 @@ public class CachingDownloader implements Downloader {
                 try (ObjectOutputStream oos = new ObjectOutputStream(out)) {
                     oos.writeObject(e);
                 }
+                e.printStackTrace();
                 Files.copy(new ByteArrayInputStream(out.toByteArray()), file);
                 throw e;
             }
-            //System.out.println("Downloaded " + uri);
+            System.out.println("Downloaded " + uri);
         } else {
-            //System.out.println("Already downloaded " + url);
+            System.out.println("Already downloaded " + url);
             try (final InputStream is = Files.newInputStream(file)) {
                 if (is.read() == FAIL_MARKER[0]) {
                     try (ObjectInputStream ois = new ObjectInputStream(is)) {
