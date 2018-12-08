@@ -6,6 +6,7 @@ object TagRemover {
     html
       .replaceAll("<script[^>]*>[^<]*</script>", "<")
       .replaceAll("<[^>]*>", "<")
+      .replaceAll("&[a-z]+;", " ")
       .replaceAll("[ \\t\\n\\x0B\\f\\r]+", " ")
       .replaceAll("<", "\n")
       .replaceAll("(\\n[ \\t\\n\\x0B\\f\\r]+)+", "\n")
