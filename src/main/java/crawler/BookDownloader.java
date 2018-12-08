@@ -29,7 +29,7 @@ public class BookDownloader {
         }
     };
 
-    private final static String MAIN_PAGE_URL = "https://www.rusprofile.ru/codes/51021";
+    private final static String MAIN_PAGE_URL = "https://e.lanbook.com/books";
     private final static String BOOK_URL = "https://e.lanbook.com/book/";
     private final static String BIBL_RECORD_BEGIN = "<div id=\"bibliographic_record\">";
     private final static String BIBL_RECORD_END = "</div>";
@@ -65,7 +65,7 @@ public class BookDownloader {
         }
         String host;
         try {
-            host = URLUtils.getHost("https://www.rusprofile.ru/codes/52011");
+            host = URLUtils.getHost("https://e.lanbook.com/books");
         } catch (MalformedURLException e) {
             System.err.println("Cannot get host of e.lanbook.com " + e.getMessage());
             return;

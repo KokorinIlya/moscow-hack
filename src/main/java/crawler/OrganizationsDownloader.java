@@ -59,7 +59,7 @@ public class OrganizationsDownloader {
 
         try (
                 Crawler crawler = new WebCrawler(
-                        new CachingDownloader(dirForDownloadedFiles), 20, 20, 100,
+                        new CachingDownloader(dirForDownloadedFiles), 1, 20, 1,
                         url -> {
                             try {
                                 if (!URLUtils.getHost(url).equals(host)) {
@@ -74,7 +74,7 @@ public class OrganizationsDownloader {
                         }
                 )
         ) {
-            Result result = crawler.download(mainPage, Integer.MAX_VALUE);
+            Result result = crawler.download(mainPage, 20);
         } catch (IOException e) {
             System.err.println("Error downloading " + e.getMessage());
         }
@@ -147,7 +147,7 @@ public class OrganizationsDownloader {
 
         if (args[0].equals("--download")) {
             Path dirForDownloadedFiles = Paths.get(args[1]);
-            for (int i = 1; i <= 9; i++) {
+            for (int i = 1; i <= 99; i++) {
                 String catName = "" + i;
                 Path forDownload = dirForDownloadedFiles.resolve(catName);
                 download(forDownload, catName);
