@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Utils {
-    public static List<Path> collect(Stream<Path> stream) {
+    public static<T> List<T> collect(Stream<T> stream) {
         return stream.collect(Collectors.toList());
     }
 }

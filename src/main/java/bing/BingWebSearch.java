@@ -56,6 +56,10 @@ public class BingWebSearch {
         return gson.toJson(json);
     }
 
+    public static SearchResults useBing(String toSearch) throws Exception {
+        return SearchWeb(searchTerm);
+    }
+
     public static void main (String[] args) {
         // Confirm the subscriptionKey is valid.
         if (subscriptionKey.length() != 32) {
@@ -71,6 +75,8 @@ public class BingWebSearch {
             System.out.println("\nRelevant HTTP Headers:\n");
             for (String header : result.relevantHeaders.keySet())
                 System.out.println(header + ": " + result.relevantHeaders.get(header));
+            System.out.println("\nWITHOUT PRETTIFY\n");
+            System.out.println(result.jsonResponse);
             System.out.println("\nJSON Response:\n");
             System.out.println(prettify(result.jsonResponse));
         }
@@ -80,13 +86,3 @@ public class BingWebSearch {
         }
     }
 }
-
-class SearchResults{
-    HashMap<String, String> relevantHeaders;
-    String jsonResponse;
-    SearchResults(HashMap<String, String> headers, String json) {
-        relevantHeaders = headers;
-        jsonResponse = json;
-    }
-}
-
