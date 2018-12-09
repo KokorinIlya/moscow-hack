@@ -1,7 +1,7 @@
 package aggregatorator;
 
-import components.Site;
-import components.SiteCounter;
+import aggregatorator.components.Site;
+import aggregatorator.components.SiteCounter;
 import lombok.NoArgsConstructor;
 
 import java.util.HashMap;

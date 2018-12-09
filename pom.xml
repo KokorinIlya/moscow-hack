@@ -177,6 +177,14 @@
             <artifactId>gson</artifactId>
             <version>2.8.5</version>
         </dependency>
+
+        <!--For Zhora-->
+        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.12.0</version>
+        </dependency>
     </dependencies>
 
 </project>
