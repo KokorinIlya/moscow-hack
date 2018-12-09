@@ -1,6 +1,6 @@
 package db.controller;
 
-import db.entity.Companies;
+import db.entity.Company;
 import db.repository.CompaniesRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,9 +10,6 @@ import org.springframework.stereotype.Controller;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Optional;
-
-import static org.springframework.data.domain.PageRequest.of;
-import static org.springframework.data.domain.Sort.by;
 
 @Controller
 public class MyController {
@@ -30,9 +27,9 @@ public class MyController {
 
 	public void getProfileById() {
 		logger.info("getProfileById=");
-		Optional<Companies> company = companiesRepo.findById();
-		if (!company.isPresent()) {
-			//
-		}
+//		Optional<Company> company = companiesRepo.findById();
+//		if (!company.isPresent()) {
+//			//
+//		}
 	}
 }
