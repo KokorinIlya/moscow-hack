@@ -5,29 +5,28 @@ import okhttp3.*;
 
 import java.io.IOException;
 
-import static zhora.ZhoraTexts.INNOVS_FOR_ZHORA1;
-import static zhora.ZhoraTexts.makeTextRequestable;
+import static zhora.ZhoraData.makeTextRequestable;
 
 public class ZhoraMain {
 //	public static void main(String[] args) {
 //		parseFromJson(search(ZhoraTexts.EXAMPLE)).getDocuments().get(0).getKeyPhrases();
 //	}
 
-	public static void main(String[] args) {
-		StringBuilder str = new StringBuilder();
-		for (String innov : INNOVS_FOR_ZHORA1) {
-			if (str.length() + innov.length() > 5000) {
-				System.out.println("str=" + str);
-				System.out.println(parseFromJson(search(str.toString())).getDocuments().get(0).getKeyPhrases());
-				str = new StringBuilder();
-			} else {
-				str.append(innov).append(". ");
-			}
-		}
-		if (!str.toString().isEmpty()) {
-			System.out.println(parseFromJson(search(str.toString())).getDocuments().get(0).getKeyPhrases());
-		}
-	}
+//	public static void main(String[] args) {
+//		StringBuilder str = new StringBuilder();
+//		for (String innov : INNOVS_FOR_ZHORA1) {
+//			if (str.length() + innov.length() > 5000) {
+//				System.out.println("str=" + str);
+//				System.out.println(parseFromJson(search(str.toString())).getDocuments().get(0).getKeyPhrases());
+//				str = new StringBuilder();
+//			} else {
+//				str.append(innov).append(". ");
+//			}
+//		}
+//		if (!str.toString().isEmpty()) {
+//			System.out.println(parseFromJson(search(str.toString())).getDocuments().get(0).getKeyPhrases());
+//		}
+//	}
 
 
 	private static String search(String cleanedSite) {
