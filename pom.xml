@@ -26,6 +26,50 @@
                 </configuration>
             </plugin>
 
+            <!--From aggregorator-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <!--Your comment
+                      Replace the mainClass with the path to your java application.
+                      It should begin with com and doesn't require the .java extension.
+                      For example: com.bingwebsearch.app.BingWebSearchSample. This maps to
+                      The following directory structure:
+                      src/main/java/com/bingwebsearch/app/BingWebSearchSample.java.
+                    -->
+                    <mainClass>Main</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attached</goal>
+                        </goals>
+                        <configuration>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <archive>
+                                <manifest>
+                                    <!--Your comment
+                                      Replace the mainClass with the path to your java application.
+                                      For example: com.bingwebsearch.app.BingWebSearchSample.java.
+                                      This maps to the following directory structure:
+                                      src/main/java/com/bingwebsearch/app/BingWebSearchSample.java.
+                                    -->
+                                    <mainClass>Main.java</mainClass>
+                                </manifest>
+                            </archive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -109,6 +153,29 @@
             <groupId>com.typesafe.play</groupId>
             <artifactId>play-json_2.11</artifactId>
             <version>2.6.9</version>
+        </dependency>
+
+        <!--For aggregorator-->
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure</artifactId>
+            <version>1.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.microsoft.azure.cognitiveservices</groupId>
+            <artifactId>azure-cognitiveservices-websearch</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.5</version>
         </dependency>
     </dependencies>
 
