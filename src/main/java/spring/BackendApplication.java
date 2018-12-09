@@ -1,11 +1,11 @@
-package db;
+package spring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class IadCurseProjectApplication {
+public class BackendApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(IadCurseProjectApplication.class, args);
+		SpringApplication.run(BackendApplication.class, args);
 	}
 }

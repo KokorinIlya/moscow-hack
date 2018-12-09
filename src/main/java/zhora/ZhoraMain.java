@@ -2,31 +2,35 @@ package zhora;
 
 import com.google.gson.Gson;
 import okhttp3.*;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.IOException;
 
-import static zhora.ZhoraData.makeTextRequestable;
+import static data.ZhoraData.makeTextRequestable;
+import static data.CategoriesData1.CATEGORIES_DATA1;
+import static data.CategoriesData2.CATEGORIES_DATA2;
 
 public class ZhoraMain {
 //	public static void main(String[] args) {
 //		parseFromJson(search(ZhoraTexts.EXAMPLE)).getDocuments().get(0).getKeyPhrases();
 //	}
 
-//	public static void main(String[] args) {
-//		StringBuilder str = new StringBuilder();
-//		for (String innov : INNOVS_FOR_ZHORA1) {
-//			if (str.length() + innov.length() > 5000) {
-//				System.out.println("str=" + str);
-//				System.out.println(parseFromJson(search(str.toString())).getDocuments().get(0).getKeyPhrases());
-//				str = new StringBuilder();
-//			} else {
-//				str.append(innov).append(". ");
-//			}
-//		}
-//		if (!str.toString().isEmpty()) {
-//			System.out.println(parseFromJson(search(str.toString())).getDocuments().get(0).getKeyPhrases());
-//		}
-//	}
+	public static void main(String[] args) {
+		StringBuilder str = new StringBuilder();
+		String[] data = ArrayUtils.addAll(CATEGORIES_DATA1, CATEGORIES_DATA2);
+		for (String innov : data) {
+			if (str.length() + innov.length() > 5000) {
+				System.out.println("str=" + str);
+				System.out.println(parseFromJson(search(str.toString())).getDocuments().get(0).getKeyPhrases());
+				str = new StringBuilder();
+			} else {
+				str.append(innov).append(". ");
+			}
+		}
+		if (!str.toString().isEmpty()) {
+			System.out.println(parseFromJson(search(str.toString())).getDocuments().get(0).getKeyPhrases());
+		}
+	}
 
 
 	private static String search(String cleanedSite) {

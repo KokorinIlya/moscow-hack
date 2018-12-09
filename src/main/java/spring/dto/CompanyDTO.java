@@ -1,4 +1,4 @@
-package db.dto;
+package spring.dto;
 
 import lombok.Getter;
 import lombok.ToString;

@@ -1,7 +1,7 @@
-package zhora;
+package data;
 
-class ZhoraData {
-	static String EXAMPLE = "Консультации бизнесу по налогам Москва, получить профессиональные налоговые консультации в Москве ЦАО Замоскворечье, помощь юриста и бухгалтера\n" +
+public class ZhoraData {
+	public static String EXAMPLE = "Консультации бизнесу по налогам Москва, получить профессиональные налоговые консультации в Москве ЦАО Замоскворечье, помощь юриста и бухгалтера\n" +
 			"/*\n" +
 			"*/\n" +
 			"+7 495 532-40-71\n" +
@@ -2048,7 +2048,7 @@ class ZhoraData {
 //			"Автомобильный кардиорегистратор для диагностики состояния водителя и идентификации личности",
 //			"Новые приборы и аппаратные комплексы"};
 
-	static String makeTextRequestable(String text) {
+	public static String makeTextRequestable(String text) {
 		return "{\"documents\": [{\"language\": \"ru\",\"id\": \"1\",\"text\": \"" + text + "\"}]}";
 	}
 }
