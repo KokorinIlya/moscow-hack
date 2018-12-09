@@ -13,9 +13,9 @@ object TagRemover {
   }
 
   def main(args: Array[String]): Unit = {
-    /*val html = Files.newBufferedReader(Paths.get("downloaded/http://www.pioneerpump.ru/http%3A%2F%2Fwww.pioneerpump.ru%2Fnews%2F2018-02.html"))
+    val html = Files.newBufferedReader(Paths.get("innov2.htm"))
       .lines().collect(Collectors.joining("\n"))
-    println(removeTags(html))*/
-    println(EverySiteDownloader.download("https://navigator-pravo.ru/"))
+    Files.newBufferedWriter(Paths.get("clear_innov2.txt")).write(removeTags(html))
+    //println(EverySiteDownloader.download("https://navigator-pravo.ru/"))
   }
 }

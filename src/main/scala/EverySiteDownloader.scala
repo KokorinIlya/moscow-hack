@@ -29,6 +29,7 @@ object EverySiteDownloader {
       reader.lines().collect(Collectors.joining("\n"))
     }.toList.mkString("\n")
     val ans = TagRemover.removeTags(text).split("\n").filter(_.length > 8).toSet.mkString("\n")
+    Files.newBufferedWriter(path.resolve("clear_version.txt")).write(ans)
     println(s"LENGTH IS ${ans.length}")
     ans
   }
