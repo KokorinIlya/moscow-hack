@@ -34,5 +34,6 @@ object BingAsker {
     )
     val names = Utils.collect(namesStream).asScala.toList
     println(names)
+    println(searchSingle("Бинг говно"))
   }
 }
