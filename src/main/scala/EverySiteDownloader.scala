@@ -8,7 +8,7 @@ import downloader.{CachingDownloader, URLUtils}
 import utils.Utils
 
 object EverySiteDownloader {
-  def download(url: String): String = {
+  def download(url: String, depth: Int): String = {
     val host = URLUtils.getHost(url)
     val path = Paths.get("downloaded").resolve(url)
     val crawler = new WebCrawler(
@@ -22,7 +22,7 @@ object EverySiteDownloader {
         }
       }
     )
-    crawler.download(url, 2)
+    crawler.download(url, depth)
     crawler.close()
     val text = Utils.collect(Files.list(path)).asScala.map { path =>
       val reader = Files.newBufferedReader(path)
@@ -30,7 +30,6 @@ object EverySiteDownloader {
     }.toList.mkString("\n")
     val ans = TagRemover.removeTags(text).split("\n").filter(_.length > 8).toSet.mkString("\n")
     Files.newBufferedWriter(path.resolve("clear_version.txt")).write(ans)
-    println(s"LENGTH IS ${ans.length}")
     ans
   }
 }
