@@ -6,6 +6,7 @@ import com.microsoft.azure.cognitiveservices.search.websearch.BingWebSearchAPI;
 import com.microsoft.azure.cognitiveservices.search.websearch.BingWebSearchManager;
 import com.microsoft.azure.cognitiveservices.search.websearch.models.SearchResponse;
 import com.microsoft.azure.cognitiveservices.search.websearch.models.WebPage;
+import scalacode.InfoGetter;
 import zhora.ZhoraMain;
 
 import java.io.BufferedWriter;
@@ -24,35 +25,9 @@ import static zhora.ZhoraMain.parseFromJson;
 
 public class Finder {
 	private static long lastParsedCompany = 0;
+
 	private static PrintWriter bingWriter;
 	private static PrintWriter aggregatorWriter;
-
-	public static void main(String[] args) {
-		setUpWriters();
-
-		try {
-			Scanner sc = new Scanner(Files.newInputStream(Paths.get("src/main/resources/companies.ksv")));
-			sc.useDelimiter(";; ");
-			while (sc.hasNext()) {
-				for (int i = 0; i < 7; i++) {
-					if (i == 1) {
-						String shortName = sc.next();
-						if (!shortName.equals("nan")) {
-							InfoGetter.getInfo(shortName);
-							zhora(result);
-						}
-						lastParsedCompany++;
-					} else {
-						sc.next();
-					}
-				}
-			}
-		} catch (Exception e) {
-			System.out.println("Can't parse csv");
-		}
-		closeWriters();
-	}
-
 	private static void setUpWriters() {
 		try {
 			FileWriter fw = new FileWriter("bing.log", true);
@@ -72,13 +47,53 @@ public class Finder {
 			System.err.println("Can't write to file aggregator.log");
 		}
 	}
-
 	private static void closeWriters() {
 		bingWriter.close();
 		aggregatorWriter.close();
 	}
 
-	private static List<Company> search(String query) {
+	public static void main(String[] args) {
+		setUpWriters();
+
+		try {
+			Scanner sc = new Scanner(Files.newInputStream(Paths.get("src/main/resources/from_bing.ksv")));
+			sc.useDelimiter(";; ");
+			int i = 0;
+			String company = "";
+			while (sc.hasNext()) {
+				String str = sc.next();
+				// domain or "NAME"
+				if (i == 0) {
+					if (str.equals("NAME")) {
+						if (!sc.hasNext()) {
+							System.out.println("!!!!!KSV file is wrong");
+						}
+						company = sc.next();
+						i = 0;
+						System.out.println("Last parsed company=" + lastParsedCompany++);
+						continue;
+					}
+				}
+				// full url
+				if (i == 1) {
+					if (!str.equals("nan")) {
+						zhora(
+								InfoGetter.getInfo(str), // download, concat and clean
+								company
+						);                              // and then get key words
+					}
+				}
+				i++;
+				if (i == 5) i = 0;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Can't parse ksv");
+		}
+		closeWriters();
+	}
+
+	private static List<Company> bingSearch(String query) {
 		try {
 			bingWriter.println("Site=" + query);
 			BingWebSearchAPI client = BingWebSearchManager.authenticate(SUBSCRIPTION_KEY);
@@ -117,11 +132,13 @@ public class Finder {
 		}
 	}
 
-	private static void zhora(String[] data) {
+	private static void zhora(List<String> data, String company) {
+		System.out.println("COMP=" + company);
+
 		StringBuilder str = new StringBuilder();
 		for (String innov : data) {
 			if (str.length() + innov.length() > 5000) {
-				System.out.println("str=" + str);
+				System.out.println("TXT=" + str);
 				System.out.println(parseFromJson(ZhoraMain.search(str.toString())).getDocuments().get(0).getKeyPhrases());
 				str = new StringBuilder();
 			} else {

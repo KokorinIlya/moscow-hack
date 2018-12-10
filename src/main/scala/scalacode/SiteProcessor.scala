@@ -1,0 +1,5 @@
+package scalacode
+
+class SiteProcessor {
+
+}
