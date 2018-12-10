@@ -9,11 +9,11 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @Getter
 @ToString
-class ZhoraResponse {
+public class ZhoraResponse {
 	@AllArgsConstructor
 	@Getter
 	@ToString
-	class ZhoraDocument {
+	public class ZhoraDocument {
 		private final Long id;
 		private final ArrayList<String> keyPhrases;
 	}

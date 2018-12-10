@@ -8,5 +8,5 @@ import spring.entity.Company;
 
 @RepositoryRestResource
 public interface CategoryRepo extends JpaRepository<Category, Long> {
-	void getById(Long id);
+	Category getById(Long id);
 }

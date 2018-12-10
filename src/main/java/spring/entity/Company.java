@@ -52,17 +52,28 @@ public class Company implements Serializable {
 		this.site = site;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name = "company_innovation", joinColumns = { @JoinColumn(name = "company_id") },
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+	@JoinTable(name = "company_category", joinColumns = { @JoinColumn(name = "company_id") },
 			inverseJoinColumns = { @JoinColumn(name = "category_id") })
 	@JoinColumn(nullable = false)
 	@JsonManagedReference
-	private Set<Category> category = new HashSet<>();
+	private Set<Category> categorySet = new HashSet<>();
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
 	@JoinTable(name = "company_innovation", joinColumns = { @JoinColumn(name = "company_id") },
 			inverseJoinColumns = { @JoinColumn(name = "innovation_id") })
 	@JoinColumn(nullable = false)
 	@JsonManagedReference
-	private Set<Innovation> innovation = new HashSet<>();
+	private Set<Innovation> innovationSet = new HashSet<>();
+
+
+	public void addCategory(Category category) {
+		categorySet.add(category);
+		category.getCompanySet().add(this);
+	}
+
+	public void addInnovation(Innovation innovation) {
+		innovationSet.add(innovation);
+		innovation.getCompanySet().add(this);
+	}
 }

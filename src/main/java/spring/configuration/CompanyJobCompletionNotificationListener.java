@@ -25,7 +25,7 @@ public class CompanyJobCompletionNotificationListener extends JobExecutionListen
 	@Override
 	public void afterJob(JobExecution jobExecution) {
 		if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
-			log.info("companies added");
+			log.info("companySet added");
 
 //			jdbcTemplate.query("SELECT id, full_name, short_name, inn, ogrn, site, okved, okved_name FROM Company",
 //					(rs, row) -> new Company(

@@ -8,5 +8,5 @@ import spring.entity.Innovation;
 
 @RepositoryRestResource
 public interface InnovationRepo extends JpaRepository<Innovation, Long> {
-	void getById(Long id);
+	Innovation getById(Long id);
 }

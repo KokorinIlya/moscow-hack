@@ -33,8 +33,7 @@ public class ZhoraMain {
 	}
 
 
-	private static String search(String cleanedSite) {
-		System.out.println("sss");
+	public static String search(String cleanedSite) {
 		OkHttpClient client = new OkHttpClient();
 
 		MediaType mediaType = MediaType.parse("application/json");
@@ -67,7 +66,7 @@ public class ZhoraMain {
 		}
 	}
 
-	private static ZhoraResponse parseFromJson(String jsonText) {
+	public static ZhoraResponse parseFromJson(String jsonText) {
 		Gson gson = new Gson();
 		return gson.fromJson(jsonText, ZhoraResponse.class);
 	}

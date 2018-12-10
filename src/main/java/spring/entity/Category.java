@@ -28,7 +28,7 @@ public class Category {
 		this.name = name;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "category")
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "categorySet")
 	@JsonBackReference
-	private Set<Company> companies = new HashSet<>();
+	private Set<Company> companySet = new HashSet<>();
 }
