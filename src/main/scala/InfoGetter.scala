@@ -3,6 +3,7 @@ import java.util
 import data.Aggregators
 
 import scala.collection.JavaConverters._
+import scala.util.control.Breaks._
 
 object InfoGetter {
   val agrs: Set[String] = Aggregators.AGGREGATORS_HOSTNAMES.toSet
@@ -15,6 +16,7 @@ object InfoGetter {
       for {agr <- agrs} {
         if (site.contains(agr)) {
           depth = 1
+          break
         }
       }
 

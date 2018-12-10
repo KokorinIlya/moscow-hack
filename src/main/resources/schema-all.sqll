@@ -1,0 +1,12 @@
+DROP TABLE company IF EXISTS;
+
+CREATE TABLE company  (
+  company_id BIGINT IDENTITY NOT NULL PRIMARY KEY,
+  full_name VARCHAR(120),
+  short_name VARCHAR(70),
+  inn bigint,
+  ogrn bigint,
+  site VARCHAR(120),
+  okved VARCHAR(20),
+  okved_name VARCHAR(300)
+);

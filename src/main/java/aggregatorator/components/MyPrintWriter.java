@@ -163,7 +163,7 @@ public class MyPrintWriter extends Writer {
 	 * instance of the Java virtual machine.
 	 *
 	 * @param  fileName
-	 *         The name of the file to use as the destination of this writer.
+	 *         The name of the file to use as the destination of this writer1.
 	 *         If the file exists then it will be truncated to zero size;
 	 *         otherwise, a new file will be created.  The output will be
 	 *         written to the file and is buffered.
@@ -202,7 +202,7 @@ public class MyPrintWriter extends Writer {
 	 * charset.
 	 *
 	 * @param  fileName
-	 *         The name of the file to use as the destination of this writer.
+	 *         The name of the file to use as the destination of this writer1.
 	 *         If the file exists then it will be truncated to zero size;
 	 *         otherwise, a new file will be created.  The output will be
 	 *         written to the file and is buffered.
@@ -242,7 +242,7 @@ public class MyPrintWriter extends Writer {
 	 * instance of the Java virtual machine.
 	 *
 	 * @param  file
-	 *         The file to use as the destination of this writer.  If the file
+	 *         The file to use as the destination of this writer1.  If the file
 	 *         exists then it will be truncated to zero size; otherwise, a new
 	 *         file will be created.  The output will be written to the file
 	 *         and is buffered.
@@ -273,7 +273,7 @@ public class MyPrintWriter extends Writer {
 	 * charset.
 	 *
 	 * @param  file
-	 *         The file to use as the destination of this writer.  If the file
+	 *         The file to use as the destination of this writer1.  If the file
 	 *         exists then it will be truncated to zero size; otherwise, a new
 	 *         file will be created.  The output will be written to the file
 	 *         and is buffered.
@@ -764,7 +764,7 @@ public class MyPrintWriter extends Writer {
 	}
 
 	/**
-	 * A convenience method to write a formatted string to this writer using
+	 * A convenience method to write a formatted string to this writer1 using
 	 * the specified format string and arguments.  If automatic flushing is
 	 * enabled, calls to this method will flush the output buffer.
 	 *
@@ -801,7 +801,7 @@ public class MyPrintWriter extends Writer {
 	 * @throws  NullPointerException
 	 *          If the <tt>format</tt> is <tt>null</tt>
 	 *
-	 * @return  This writer
+	 * @return  This writer1
 	 *
 	 * @since  1.5
 	 */
@@ -810,7 +810,7 @@ public class MyPrintWriter extends Writer {
 	}
 
 	/**
-	 * A convenience method to write a formatted string to this writer using
+	 * A convenience method to write a formatted string to this writer1 using
 	 * the specified format string and arguments.  If automatic flushing is
 	 * enabled, calls to this method will flush the output buffer.
 	 *
@@ -852,7 +852,7 @@ public class MyPrintWriter extends Writer {
 	 * @throws  NullPointerException
 	 *          If the <tt>format</tt> is <tt>null</tt>
 	 *
-	 * @return  This writer
+	 * @return  This writer1
 	 *
 	 * @since  1.5
 	 */
@@ -861,7 +861,7 @@ public class MyPrintWriter extends Writer {
 	}
 
 	/**
-	 * Writes a formatted string to this writer using the specified format
+	 * Writes a formatted string to this writer1 using the specified format
 	 * string and arguments.  If automatic flushing is enabled, calls to this
 	 * method will flush the output buffer.
 	 *
@@ -896,7 +896,7 @@ public class MyPrintWriter extends Writer {
 	 * @throws  NullPointerException
 	 *          If the <tt>format</tt> is <tt>null</tt>
 	 *
-	 * @return  This writer
+	 * @return  This writer1
 	 *
 	 * @since  1.5
 	 */
@@ -920,7 +920,7 @@ public class MyPrintWriter extends Writer {
 	}
 
 	/**
-	 * Writes a formatted string to this writer using the specified format
+	 * Writes a formatted string to this writer1 using the specified format
 	 * string and arguments.  If automatic flushing is enabled, calls to this
 	 * method will flush the output buffer.
 	 *
@@ -956,7 +956,7 @@ public class MyPrintWriter extends Writer {
 	 * @throws  NullPointerException
 	 *          If the <tt>format</tt> is <tt>null</tt>
 	 *
-	 * @return  This writer
+	 * @return  This writer1
 	 *
 	 * @since  1.5
 	 */
@@ -979,7 +979,7 @@ public class MyPrintWriter extends Writer {
 	}
 
 	/**
-	 * Appends the specified character sequence to this writer.
+	 * Appends the specified character sequence to this writer1.
 	 *
 	 * <p> An invocation of this method of the form <tt>out.append(csq)</tt>
 	 * behaves in exactly the same way as the invocation
@@ -996,9 +996,9 @@ public class MyPrintWriter extends Writer {
 	 * @param  csq
 	 *         The character sequence to append.  If <tt>csq</tt> is
 	 *         <tt>null</tt>, then the four characters <tt>"null"</tt> are
-	 *         appended to this writer.
+	 *         appended to this writer1.
 	 *
-	 * @return  This writer
+	 * @return  This writer1
 	 *
 	 * @since  1.5
 	 */
@@ -1011,7 +1011,7 @@ public class MyPrintWriter extends Writer {
 	}
 
 	/**
-	 * Appends a subsequence of the specified character sequence to this writer.
+	 * Appends a subsequence of the specified character sequence to this writer1.
 	 *
 	 * <p> An invocation of this method of the form <tt>out.append(csq, start,
 	 * end)</tt> when <tt>csq</tt> is not <tt>null</tt>, behaves in
@@ -1033,7 +1033,7 @@ public class MyPrintWriter extends Writer {
 	 *         The index of the character following the last character in the
 	 *         subsequence
 	 *
-	 * @return  This writer
+	 * @return  This writer1
 	 *
 	 * @throws  IndexOutOfBoundsException
 	 *          If <tt>start</tt> or <tt>end</tt> are negative, <tt>start</tt>
@@ -1049,7 +1049,7 @@ public class MyPrintWriter extends Writer {
 	}
 
 	/**
-	 * Appends the specified character to this writer.
+	 * Appends the specified character to this writer1.
 	 *
 	 * <p> An invocation of this method of the form <tt>out.append(c)</tt>
 	 * behaves in exactly the same way as the invocation
@@ -1060,7 +1060,7 @@ public class MyPrintWriter extends Writer {
 	 * @param  c
 	 *         The 16-bit character to append
 	 *
-	 * @return  This writer
+	 * @return  This writer1
 	 *
 	 * @since 1.5
 	 */

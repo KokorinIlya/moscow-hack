@@ -1,13 +1,11 @@
 package spring.controller;
 
-import org.springframework.data.rest.webmvc.RepositoryRestController;
-import spring.entity.Innovation;
-import spring.repository.CategoryRepo;
-import spring.repository.CompanyRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
+import spring.repository.CategoryRepo;
+import spring.repository.CompanyRepo;
 import spring.repository.InnovationRepo;
 
 import javax.persistence.EntityManager;
@@ -27,8 +25,12 @@ public class MyController {
 	@Autowired
 	public MyController(CompanyRepo companyRepo, InnovationRepo innovationRepo, CategoryRepo categoryRepo) {
 		this.companyRepo = companyRepo;
-		this.categoryRepo = categoryRepo;
 		this.innovationRepo = innovationRepo;
+		this.categoryRepo = categoryRepo;
+	}
+
+	public void setCompanyCategory(Long companyId, Long categoryId) {
+
 	}
 
 	public void getProfileById() {

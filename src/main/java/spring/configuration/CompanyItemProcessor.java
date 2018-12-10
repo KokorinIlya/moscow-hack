@@ -16,8 +16,8 @@ public class CompanyItemProcessor implements ItemProcessor<Company, Company> {
 		final String okvedName = company.getOkvedName().toLowerCase();
 		final String site = company.getSite().toLowerCase();
 
-		return new Company(fullName, shortName, company.getINN(), company.getOGRN(),
-				company.getOkved(), okvedName, site, company.getCategory(), company.getInnovation());
+		return new Company(company.getId(), fullName, shortName, company.getINN(), company.getOGRN(),
+				company.getOkved(), okvedName, site);
 	}
 
 }

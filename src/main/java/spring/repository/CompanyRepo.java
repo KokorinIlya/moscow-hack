@@ -7,4 +7,5 @@ import spring.entity.Company;
 
 @RepositoryRestResource
 public interface CompanyRepo extends JpaRepository<Company, Long> {
+	void getById(Long id);
 }

@@ -6,16 +6,18 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(of = {"id", "INN", "name"})
+@ToString(of = {"id", "INN", "shortName"})
 public class Company implements Serializable {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Column
@@ -39,7 +41,8 @@ public class Company implements Serializable {
 	@Column
 	private String site;
 
-	public Company(String fullName, String shortName, Long INN, Long OGRN, String okved, String okvedName, String site, Category category, Innovation innovation) {
+	public Company(Long id, String fullName, String shortName, Long INN, Long OGRN, String okved, String okvedName, String site) {
+		this.id = id;
 		this.fullName = fullName;
 		this.shortName = shortName;
 		this.INN = INN;
@@ -47,17 +50,19 @@ public class Company implements Serializable {
 		this.okved = okved;
 		this.okvedName = okvedName;
 		this.site = site;
-		this.category = category;
-		this.innovation = innovation;
 	}
 
-	@ManyToOne
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name = "company_innovation", joinColumns = { @JoinColumn(name = "company_id") },
+			inverseJoinColumns = { @JoinColumn(name = "category_id") })
 	@JoinColumn(nullable = false)
 	@JsonManagedReference
-	private Category category;
+	private Set<Category> category = new HashSet<>();
 
-	@ManyToOne
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name = "company_innovation", joinColumns = { @JoinColumn(name = "company_id") },
+			inverseJoinColumns = { @JoinColumn(name = "innovation_id") })
 	@JoinColumn(nullable = false)
 	@JsonManagedReference
-	private Innovation innovation;
+	private Set<Innovation> innovation = new HashSet<>();
 }
